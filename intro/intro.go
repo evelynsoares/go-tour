@@ -59,7 +59,9 @@ func needFloat(x float64) float64 {
 func main() {
 
 	var i, j int = 1, 2
-	k := 3 //short assigned state that can be used in place of a var declaration with implicit type, not available outside a function
+	// short assigned state that can be used in place of a var declaration with implicit type
+	// not available outside a function
+	k := 3 
 	fmt.Println(i, cpp, python, golang, solidity) // will print variables of different types
 	
 
