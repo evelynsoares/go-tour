@@ -34,8 +34,13 @@ func do(a [3]int, b []int) []int {
 	return c
 }
 
+// maps are dictionaries, they are passed by reference, no copying, can be updated
+var m map[string]int // a nil map
+
 func main(){
 	three = two // elements copied
+	
+	fmt.Println("================== Arrays ==================")
 	fmt.Println(three)
 
 	a = append(a, 1)
@@ -53,6 +58,7 @@ func main(){
 
 	t := []byte("string")
 
+	fmt.Println("================== Slices ==================")
 	fmt.Println(len(t), t)
 	fmt.Println(t[2])
 	fmt.Println(t[:2])
@@ -68,5 +74,45 @@ func main(){
 
 	z := w[:2] 		// arrays can be sliced
 	fmt.Println(z)
-}
 
+	fmt.Println("================== Maps ==================")
+	// key type in brackets, values afterwards
+	p := make(map[string]int) // an empty map, initialized
+
+	k := p["the"]
+	fmt.Println(k, p) // 0, map[] -> 0 is the default for an int map
+	j := m["the"]
+	// m["and"] = 1
+	// panic: assignment to entry in nil map -> you can only write keys for a map that exists
+
+	m = p // reference!!
+	m["and"]++		// since it didnt exist a value before (0), go sums with 0
+	o := p["and"]
+	
+	fmt.Println(m, p, o, j)
+
+	// cannot be comparable, only comparable to nil m == nil?
+	// the type of the key gotta to be comparable
+
+	map_of_names := map[string]int{
+		"jonas": 1,
+		"tiago": 2,
+		"pedro": 2,
+		"lucia": 3,
+	}
+
+	i, ok := map_of_names["the"]
+	fmt.Println(i, ok)
+	i, ok = map_of_names["jonas"]
+	fmt.Println(i, ok)
+	i, ok = map_of_names["never"]
+	fmt.Println(i, ok)
+
+	delete(map_of_names, "jonas")
+	i, ok = map_of_names["jonas"]
+	fmt.Println(i, ok)
+
+	// nil, zero value is useful, lenght of nil is 0
+
+	CountingValues()
+}
